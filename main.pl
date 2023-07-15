@@ -10,18 +10,15 @@ use FindBin qw($Bin);
 
 my $repo_dir = "$Bin/test";
 
-my $prompt = "Come up with pet project written in Go. The project must be single file, the project should be large size more than 5000 symbols. 
-Write the answer to this in following format in json
+my $prompt = "Write a large and non-trivial petproject using Golang for enchancing my github account for future.
+Write the answer to this in following format in json:
 {
 Name: name of project
-Code: code in golang
-Readme: nice readme with more than 500 symbols of description. 
+Code:  Go code with more than 5000 symbols
+Readme: project's README with more than 500 symbols
 }
 
-Do not include anything about count of symbols in readme;
-
-please provide a valid json file
-double check the json after generation";
+please provide a valid json file";
 
 my $response = decode_json chatgpt::send_request($prompt);
 
@@ -41,5 +38,6 @@ print FH (($response)->{Readme});
 close(FH);
 
 # Go mod
-system('go', 'mod', 'init', ($response)->{Name})
-
+my $modName = ($response)->{Name};
+$modName =~ s/\s*//g;
+system('go', 'mod', 'init', $modName);

@@ -11,9 +11,10 @@ sub send_request {
     my ($prompt) = @_;
 
     my $payload = {
-        "model" => "gpt-3.5-turbo",
+        "model" => "gpt-3.5-turbo-16k",
         "messages" => [{"role" => "user", "content" => $prompt}],
-        "temperature" => 0.7,
+        "temperature" => 0.9,
+        "max_tokens" => 2048,
     };
 
     my $json_payload = encode_json($payload);
