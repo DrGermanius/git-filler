@@ -10,7 +10,7 @@ use FindBin qw($Bin);
 
 my $repo_dir = "$Bin/test";
 
-my $prompt = "Write a large and non-trivial petproject using Golang for enchancing my github account for future.
+my $prompt = "Write an application for converting image files to different formats.
 Write the answer to this in following format in json:
 {
 Name: name of project
@@ -20,7 +20,11 @@ Readme: project's README with more than 500 symbols
 
 please provide a valid json file";
 
-my $response = decode_json chatgpt::send_request($prompt);
+print "Enter chatGPT API token: ";
+my $token = <STDIN>;
+chomp($token);
+
+my $response = decode_json chatgpt::send_request($prompt, $token);
 
 mkdir($repo_dir, 0700) unless(-d $repo_dir );
 chdir($repo_dir) or die "can't chdir $repo_dir\n";

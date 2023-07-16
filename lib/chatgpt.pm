@@ -8,13 +8,13 @@ use JSON::MaybeXS;
 my $url = 'https://api.openai.com/v1/chat/completions';
 
 sub send_request {
-    my ($prompt) = @_;
+    my ($prompt, $token) = @_;
 
     my $payload = {
         "model" => "gpt-3.5-turbo-16k",
         "messages" => [{"role" => "user", "content" => $prompt}],
-        "temperature" => 0.9,
-        "max_tokens" => 2048,
+        "temperature" => 0.99,
+        "max_tokens" => 10000,
     };
 
     my $json_payload = encode_json($payload);
@@ -22,7 +22,7 @@ sub send_request {
     my $ua = LWP::UserAgent->new;
     my $headers = HTTP::Headers->new(
         'Content-Type' => 'application/json',
-        'Authorization' => 'Bearer token',
+        'Authorization' => 'Bearer ' . $token,
     );
     $ua->default_headers($headers);
     my $response = $ua->post($url, Content => $json_payload);
