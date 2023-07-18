@@ -1,0 +1,1 @@
+'git-filler' is a command-line tool that generates a random pet project in Golang, initializes it as a Git repository, and automatically creates a README file. It provides a quick and easy way to fill your github account. After generating the project and README, you can push it to your GitHub repository.
